@@ -42,6 +42,10 @@
       "typedRoutes": true
     },
     "extra": {
+      "EXPO_PUBLIC_TICKETMASTER_API_KEY": "f2G2ePCKAcsEY4Iy9OfJDKbdHUqqWQHd",
+      "eas": {
+        "projectId": ""
+      },
       "firebase": {
         "apiKey": "AIzaSyAhh09LdJrqUYV9aEfcvU7PMtPTCJho-_Y",
         "authDomain": "event-explorer-local.firebaseapp.com",

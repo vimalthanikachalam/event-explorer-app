@@ -113,8 +113,6 @@ export default function AppLockGate({ children }: Props) {
       } else if ((res as any).error) {
         const code = String((res as any).error);
         if (code === 'missing_usage_description') {
-          // iOS on Expo Go: cannot show Face ID without native Info.plist; use PIN fallback
-          setError('Biometrics unavailable in this build. Use PIN or run a dev build.');
           if (await hasPin()) setPinMode(true);
         } else {
           setError(code);

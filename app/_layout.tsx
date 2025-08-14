@@ -1,20 +1,23 @@
 import { Stack, useRouter, useSegments } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, I18nManager, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { bootstrapAuth } from '../common/slices/authSlice';
+import { bootstrapFavorites } from '../common/slices/favoritesSlice';
 import { RootState, store, useAppDispatch, useAppSelector } from '../common/store';
 
 function RootNavigator() {
   const segments = useSegments();
   const router = useRouter();
   const { user } = useAppSelector((s: RootState) => s.auth);
+  const { rtl } = useAppSelector((s: RootState) => s.locale);
   const [ready, setReady] = useState(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     (async () => {
       await dispatch(bootstrapAuth());
+      await dispatch(bootstrapFavorites());
       setReady(true);
     })();
   }, [dispatch]);
@@ -33,6 +36,14 @@ function RootNavigator() {
       router.replace('/(app)');
     }
   }, [segments, user, ready, router]);
+
+  useEffect(() => {
+    // Apply RTL setting at runtime; full reload may be required to reflect completely.
+    if (I18nManager.isRTL !== rtl) {
+      I18nManager.allowRTL(rtl);
+      I18nManager.forceRTL(rtl);
+    }
+  }, [rtl]);
 
   if (!ready) {
     return (

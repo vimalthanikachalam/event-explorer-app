@@ -1,22 +1,44 @@
-import React from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from "react";
+import {
+  I18nManager,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from "react-native";
 
-export default function Screen({ children }: { children: React.ReactNode }) {
+type Props = {
+  children: React.ReactNode;
+  scroll?: boolean; // default true
+  contentStyle?: ViewStyle;
+};
+
+export default function Screen({ children, contentStyle }: Props) {
   return (
-    <SafeAreaView style={styles.safe}>
-      <StatusBar backgroundColor="#3f3f3f" />
-      <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
-          <View style={{ width: '100%' }}>{children}</View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+    <KeyboardAvoidingView
+      style={styles.flex}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}>
+      <View
+        style={[
+          styles.container,
+          I18nManager.isRTL && styles.rtl,
+          contentStyle,
+        ]}>
+        <View style={{ width: "100%", flex: 1 }}>{children}</View>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#fff' },
   flex: { flex: 1 },
-  container: { flexGrow: 1, padding: 20, alignItems: 'center', justifyContent: 'center' },
+  container: {
+    flex: 1,
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    backgroundColor: "#fff",
+  },
+  rtl: { direction: "rtl" as any },
 });

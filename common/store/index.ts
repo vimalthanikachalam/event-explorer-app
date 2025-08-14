@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import authReducer from '../slices/authSlice';
+import eventsReducer from '../slices/eventsSlice';
+import favoritesReducer from '../slices/favoritesSlice';
+import localeReducer from '../slices/localeSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+  events: eventsReducer,
+  favorites: favoritesReducer,
+  locale: localeReducer,
   },
 });
 
