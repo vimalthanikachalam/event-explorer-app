@@ -1,6 +1,12 @@
-# Welcome to your Expo app 👋
+# Event Explorer app
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This Expo app includes:
+
+- Firebase Authentication and Firestore (email/password)
+- AsyncStorage for local caching of user profile
+- Biometric login (Face ID / Touch ID) via expo-local-authentication
+- Redux Toolkit for state management
+- Clean, modular structure with common hooks, services, and storage utils
 
 ## Get started
 
@@ -10,7 +16,20 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. Configure Firebase
+
+   Create a Firebase project and add a web app. Copy the config values and set these environment variables (used by `app.json -> expo.extra.firebase`):
+
+   ```bash
+   export FIREBASE_API_KEY=...
+   export FIREBASE_AUTH_DOMAIN=...
+   export FIREBASE_PROJECT_ID=...
+   export FIREBASE_STORAGE_BUCKET=...
+   export FIREBASE_MESSAGING_SENDER_ID=...
+   export FIREBASE_APP_ID=...
+   ```
+
+3. Start the app
 
    ```bash
    npx expo start
@@ -24,6 +43,19 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+Auth flows:
+
+- Sign in: `/(auth)/sign-in`
+- Sign up: `/(auth)/sign-up`
+- Forgot password: `/(auth)/forgot-password`
+
+After sign-in, you'll land on `/(app)`.
+
+Security notes:
+
+- Sensitive tokens should be stored via `expo-secure-store` (see `common/storage/secureStore.ts`).
+- Firebase config is read from environment variables injected via `app.json -> expo.extra.firebase`.
 
 ## Get a fresh project
 

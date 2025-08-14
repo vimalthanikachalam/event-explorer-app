@@ -9,7 +9,10 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Enable Face ID to quickly and securely sign in to Event Explorer."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -37,6 +40,16 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "firebase": {
+        "apiKey": "AIzaSyAhh09LdJrqUYV9aEfcvU7PMtPTCJho-_Y",
+        "authDomain": "event-explorer-local.firebaseapp.com",
+        "projectId": "event-explorer-local",
+        "storageBucket": "event-explorer-local.firebasestorage.app",
+        "messagingSenderId": "112222412976",
+        "appId": "1:112222412976:web:6f5393e053e232bf179b75"
+      }
     }
   }
 }
