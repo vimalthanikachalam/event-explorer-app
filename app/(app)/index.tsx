@@ -22,7 +22,6 @@ export default function HomeScreen() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Fetch any missing favorite details
     const missing = favIds.filter((id) => !byId[id]);
     missing.forEach((id) => dispatch(fetchById(id)));
   }, [favIds, byId, dispatch]);

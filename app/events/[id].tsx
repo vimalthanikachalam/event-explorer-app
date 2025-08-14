@@ -1,11 +1,20 @@
-import { useEvent } from '@/common/hooks/useEvents';
+import { useEvent } from "@/common/hooks/useEvents";
 import i18n from '@/common/i18n';
-import FavoriteButton from '@/components/FavoriteButton';
-import MapPreview from '@/components/MapPreview';
-import { useLocalSearchParams } from 'expo-router';
-import React from 'react';
-import { ActivityIndicator, Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import FavoriteButton from "@/components/FavoriteButton";
+import MapPreview from "@/components/MapPreview";
+import Button from "@/components/ui/Button";
+import { Stack, useLocalSearchParams } from "expo-router";
+import React from "react";
+import {
+  ActivityIndicator,
+  Linking,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function EventDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -13,7 +22,7 @@ export default function EventDetailScreen() {
 
   if (!item) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ActivityIndicator />
       </View>
     );
@@ -33,7 +42,13 @@ export default function EventDetailScreen() {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Stack.Screen
+        options={{
+          title: i18n.t('event_details'),
+          headerShown: true,
+        }}
+      />
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>{item.name}</Text>
         <View style={styles.row}>
@@ -56,11 +71,12 @@ export default function EventDetailScreen() {
         ) : null}
 
         {item.url ? (
-          <Pressable onPress={() => Linking.openURL(item.url!)}>
-            <Text style={styles.link}>
-              {i18n.t("details")}: {item.url}
-            </Text>
-          </Pressable>
+          <View style={{ marginTop: 16 }}>
+            <Button
+              onPress={() => Linking.openURL(item.url!)}
+              title={i18n.t('book_tickets')}
+            />
+          </View>
         ) : null}
       </ScrollView>
     </SafeAreaView>
@@ -68,10 +84,15 @@ export default function EventDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 20 },
-  title: { fontWeight: '800', fontSize: 22, color: '#0f172a' },
-  row: { marginTop: 8, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  meta: { color: '#475569' },
-  date: { marginTop: 8, color: '#0f172a' },
-  link: { color: '#2563eb', marginTop: 16 },
+  container: { padding: 20, paddingTop: 0 },
+  title: { fontWeight: "800", fontSize: 22, color: "#0f172a" },
+  row: {
+    marginTop: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  meta: { color: "#475569" },
+  date: { marginTop: 8, color: "#0f172a" },
+  link: { color: "#2563eb", marginTop: 16 },
 });
