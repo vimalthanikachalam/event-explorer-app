@@ -3,7 +3,8 @@ import Input from '@/components/ui/Input';
 import Screen from '@/components/ui/Screen';
 import { Link } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { clearError, forgotPassword } from '../../common/slices/authSlice';
 import { RootState, useAppDispatch, useAppSelector } from '../../common/store';
 
@@ -22,12 +23,28 @@ export default function ForgotPassword() {
   };
 
   return (
-    <Screen>
-      <Text style={styles.title}>Reset your password</Text>
-      <Input label="Email" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} />
-      <Button title={status === 'loading' ? 'Sending...' : 'Send reset email'} onPress={onSubmit} loading={status === 'loading'} />
-      <Link href="/(auth)/sign-in"><Text style={styles.linkCenter}>Back to Sign in</Text></Link>
-    </Screen>
+    <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
+      <Screen>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
+          <Text style={styles.title}>Reset your password</Text>
+          <Input
+            label="Email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Button
+            title={status === "loading" ? "Sending..." : "Send reset email"}
+            onPress={onSubmit}
+            loading={status === "loading"}
+          />
+          <Link href="/(auth)/sign-in">
+            <Text style={styles.linkCenter}>Back to Sign in</Text>
+          </Link>
+        </KeyboardAvoidingView>
+      </Screen>
+    </SafeAreaView>
   );
 }
 

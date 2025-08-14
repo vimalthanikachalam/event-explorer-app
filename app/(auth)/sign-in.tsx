@@ -7,6 +7,7 @@ import Screen from '@/components/ui/Screen';
 import { Link, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Alert, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { clearError, signIn } from '../../common/slices/authSlice';
 
 export default function SignIn() {
@@ -33,25 +34,47 @@ export default function SignIn() {
   };
 
   return (
-    <Screen>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Welcome back</Text>
-        <Text style={styles.subtitle}>Sign in to continue</Text>
-      </View>
-      <Input label="Email" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} />
-      <Input label="Password" secureTextEntry value={password} onChangeText={setPassword} />
-      <Button title={status === 'loading' ? 'Signing in...' : 'Sign In'} onPress={onSubmit} loading={status === 'loading'} />
-      <View style={styles.row}>
-        <Link href="/(auth)/forgot-password" asChild>
-          <Pressable><Text style={styles.link}>Forgot password?</Text></Pressable>
-        </Link>
-        <Link href="/(auth)/sign-up" asChild>
-          <Pressable><Text style={styles.link}>Create account</Text></Pressable>
-        </Link>
-      </View>
-      </KeyboardAvoidingView>
-    </Screen>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Screen>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1, flexDirection: "column", justifyContent: "center", padding: 16 }}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Welcome back</Text>
+            <Text style={styles.subtitle}>Sign in to continue</Text>
+          </View>
+          <Input
+            label="Email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Input
+            label="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+          />
+          <Button
+            title={status === "loading" ? "Signing in..." : "Sign In"}
+            onPress={onSubmit}
+            loading={status === "loading"}
+          />
+          <View style={styles.row}>
+            <Link href="/(auth)/forgot-password" asChild>
+              <Pressable>
+                <Text style={styles.link}>Forgot password?</Text>
+              </Pressable>
+            </Link>
+            <Link href="/(auth)/sign-up" asChild>
+              <Pressable>
+                <Text style={styles.link}>Create account</Text>
+              </Pressable>
+            </Link>
+          </View>
+        </KeyboardAvoidingView>
+      </Screen>
+    </SafeAreaView>
   );
 }
 

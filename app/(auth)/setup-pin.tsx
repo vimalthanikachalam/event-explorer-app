@@ -4,7 +4,7 @@ import Input from '@/components/ui/Input';
 import Screen from '@/components/ui/Screen';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
 
 export default function SetupPin() {
   const [pin, setPinInput] = useState('');
@@ -38,27 +38,35 @@ export default function SetupPin() {
 
   return (
     <Screen>
-      <View style={styles.header}>
-        <Text style={styles.title}>Set your 4-digit PIN</Text>
-        <Text style={styles.subtitle}>Used to unlock when biometrics are unavailable</Text>
-      </View>
-      <Input
-        label="PIN"
-        keyboardType="number-pad"
-        secureTextEntry
-        maxLength={4}
-        value={pin}
-        onChangeText={(t) => setPinInput(t.replace(/\D/g, '').slice(0, 4))}
-      />
-      <Input
-        label="Confirm PIN"
-        keyboardType="number-pad"
-        secureTextEntry
-        maxLength={4}
-        value={confirm}
-        onChangeText={(t) => setConfirm(t.replace(/\D/g, '').slice(0, 4))}
-      />
-      <Button title={busy ? 'Saving…' : 'Save PIN'} onPress={onSave} disabled={busy} />
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Set your 4-digit PIN</Text>
+          <Text style={styles.subtitle}>
+            Used to unlock when biometrics are unavailable
+          </Text>
+        </View>
+        <Input
+          label="PIN"
+          keyboardType="number-pad"
+          secureTextEntry
+          maxLength={4}
+          value={pin}
+          onChangeText={(t) => setPinInput(t.replace(/\D/g, "").slice(0, 4))}
+        />
+        <Input
+          label="Confirm PIN"
+          keyboardType="number-pad"
+          secureTextEntry
+          maxLength={4}
+          value={confirm}
+          onChangeText={(t) => setConfirm(t.replace(/\D/g, "").slice(0, 4))}
+        />
+        <Button
+          title={busy ? "Saving…" : "Save PIN"}
+          onPress={onSave}
+          disabled={busy}
+        />
+      </KeyboardAvoidingView>
     </Screen>
   );
 }
