@@ -5,6 +5,7 @@ import MapPreview from '@/components/MapPreview';
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { ActivityIndicator, Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function EventDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -32,24 +33,37 @@ export default function EventDetailScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>{item.name}</Text>
-      <View style={styles.row}>
-        <Text style={styles.meta}>{item.venue || item.city}</Text>
-        <FavoriteButton id={item.id} />
-      </View>
-      {item.date ? <Text style={styles.date}>{new Date(item.date).toLocaleString()}</Text> : null}
+    <SafeAreaView>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>{item.name}</Text>
+        <View style={styles.row}>
+          <Text style={styles.meta}>{item.venue || item.city}</Text>
+          <FavoriteButton id={item.id} />
+        </View>
+        {item.date ? (
+          <Text style={styles.date}>
+            {new Date(item.date).toLocaleString()}
+          </Text>
+        ) : null}
 
-      {item.latitude && item.longitude ? (
-        <MapPreview latitude={item.latitude} longitude={item.longitude} label={item.venue || item.name} onOpenExternal={openMap} />
-      ) : null}
+        {item.latitude && item.longitude ? (
+          <MapPreview
+            latitude={item.latitude}
+            longitude={item.longitude}
+            label={item.venue || item.name}
+            onOpenExternal={openMap}
+          />
+        ) : null}
 
-      {item.url ? (
-        <Pressable onPress={() => Linking.openURL(item.url!)}>
-          <Text style={styles.link}>{i18n.t('details')}: {item.url}</Text>
-        </Pressable>
-      ) : null}
-    </ScrollView>
+        {item.url ? (
+          <Pressable onPress={() => Linking.openURL(item.url!)}>
+            <Text style={styles.link}>
+              {i18n.t("details")}: {item.url}
+            </Text>
+          </Pressable>
+        ) : null}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
