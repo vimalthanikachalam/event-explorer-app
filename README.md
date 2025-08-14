@@ -46,6 +46,10 @@ Screenshots:
 - Event Details
 - Profile
 
+Android demo video:
+[▶ Watch the demo video](https://github.com/vimalthanikachalam/event-explorer-app/raw/refs/heads/main/demo/android-demo.mp4)
+
+
 <div align="left">
    <img src="demo/Home.png" alt="Home" width="280" />
    <img src="demo/EventDetails.png" alt="Event Details" width="280" />
@@ -54,14 +58,6 @@ Screenshots:
    <em>Find these images in the repo at demo/</em>
 </div>
 
-Android demo video:
-
-- View inline on GitHub: demo/android-demo.mp4
-- Or download/play locally.
-
-<video src="demo/android-demo.mp4" controls width="560">
-   Your browser doesn't support embedded videos. You can download it from demo/android-demo.mp4
-</video>
 
 ## Demo credentials
 
