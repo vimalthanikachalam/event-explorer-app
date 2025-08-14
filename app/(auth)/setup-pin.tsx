@@ -38,7 +38,7 @@ export default function SetupPin() {
 
   return (
     <Screen>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
         <View style={styles.header}>
           <Text style={styles.title}>Set your 4-digit PIN</Text>
           <Text style={styles.subtitle}>
@@ -51,6 +51,7 @@ export default function SetupPin() {
           secureTextEntry
           maxLength={4}
           value={pin}
+          style={{ minWidth: 200 }}
           onChangeText={(t) => setPinInput(t.replace(/\D/g, "").slice(0, 4))}
         />
         <Input
@@ -59,6 +60,7 @@ export default function SetupPin() {
           secureTextEntry
           maxLength={4}
           value={confirm}
+          style={{ minWidth: 200 }}
           onChangeText={(t) => setConfirm(t.replace(/\D/g, "").slice(0, 4))}
         />
         <Button

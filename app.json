@@ -12,14 +12,16 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSFaceIDUsageDescription": "Enable Face ID to quickly and securely sign in to Event Explorer."
-      }
+      },
+      "bundleIdentifier": "com.vimaleurakaa.eventexplorer"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.vimaleurakaa.eventexplorer"
     },
     "web": {
       "bundler": "metro",
@@ -44,7 +46,7 @@
     "extra": {
       "EXPO_PUBLIC_TICKETMASTER_API_KEY": "f2G2ePCKAcsEY4Iy9OfJDKbdHUqqWQHd",
       "eas": {
-        "projectId": ""
+        "projectId": "b2e20d46-1b6e-426e-a628-c6fefc8fe1dd"
       },
       "firebase": {
         "apiKey": "AIzaSyAhh09LdJrqUYV9aEfcvU7PMtPTCJho-_Y",
@@ -53,7 +55,8 @@
         "storageBucket": "event-explorer-local.firebasestorage.app",
         "messagingSenderId": "112222412976",
         "appId": "1:112222412976:web:6f5393e053e232bf179b75"
-      }
+      },
+      "router": {}
     }
   }
 }

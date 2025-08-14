@@ -38,6 +38,36 @@ npm run web
 
 You can also open in Expo Go on a device by scanning the QR code from the terminal UI.
 
+## Demo
+
+Screenshots:
+
+- Home
+- Event Details
+- Profile
+
+<div align="left">
+   <img src="demo/Home.png" alt="Home" width="280" />
+   <img src="demo/EventDetails.png" alt="Event Details" width="280" />
+   <img src="demo/Profile.png" alt="Profile" width="280" />
+   <br />
+   <em>Find these images in the repo at demo/</em>
+</div>
+
+Android demo video:
+
+- View inline on GitHub: demo/android-demo.mp4
+- Or download/play locally.
+
+<video src="demo/android-demo.mp4" controls width="560">
+   Your browser doesn't support embedded videos. You can download it from demo/android-demo.mp4
+</video>
+
+## Demo credentials
+
+- Username: admin@google.com
+- Password: admin@google.com
+
 ## Features
 
 - Email/password auth with Firebase Auth; user profile persisted in Firestore
